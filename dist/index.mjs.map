@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/index.ts"],"sourcesContent":["console.log('Hello World')\r\n\r\nfunction sum (a: number, b: number): number {\r\n    return a + b\r\n    }\r\n\r\n    console.log(sum(1, 2))"],"mappings":";AAAA,QAAQ,IAAI,aAAa;AAEzB,SAAS,IAAK,GAAW,GAAmB;AACxC,SAAO,IAAI;AACX;AAEA,QAAQ,IAAI,IAAI,GAAG,CAAC,CAAC;","names":[]}
