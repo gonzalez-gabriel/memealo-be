@@ -1,4 +1,4 @@
-import {Router} from 'express'
+import { Router } from 'express'
 import { getAllRooms, createRoom, deleteRoom, getRoom, updateRoom } from '../controllers/roomController'
 
 const router = Router()
