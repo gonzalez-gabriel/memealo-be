@@ -109,32 +109,40 @@ model UsersCosmetics {
   cosmeticId Int       @map("cosmetic_id")
   cosmetic   Cosmetics @relation(fields: [cosmeticId], references: [id])
   owned      Boolean   @default(false)
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
 
   @@id([userId, cosmeticId])
   @@map("users_cosmetics")
 }
 
 model Situations {
-  id           Int    @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   descriptions String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
 }
 
 model MemeCard {
-  id         Int    @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   name       String
-  cardNumber Int    @unique @map("card_number")
-  imageUrl   String @map("image_url")
-  cardLore   String @map("card_lore")
+  cardNumber Int      @unique @map("card_number")
+  imageUrl   String   @map("image_url")
+  cardLore   String   @map("card_lore")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 
   @@map("meme_card")
 }
 
 model TwistCards {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String
-  key         String @unique
-  imageUrl    String @map("image_url")
+  key         String   @unique
+  imageUrl    String   @map("image_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("twist_cards")
 }
