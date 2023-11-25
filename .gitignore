@@ -4,3 +4,4 @@ package-lock.json
 dist
 compose
 .dockerignore
+compose.yml

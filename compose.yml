@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PW}
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:5432"
     restart: always
 
   pgadmin:
@@ -18,5 +18,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
     ports:
-      - "5050:80"
+      - "${PGADMIN_PORT}:80"
+    depends_on:
+      - postgres
     restart: always
