@@ -25,6 +25,9 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params
     const user = await userService.getOne(id)
+    if (user !== null) {
+      return httpResponse.NOT_FOUND(res, 'User not found')
+    }
     return httpResponse.OK(res, user)
   } catch (error) {
     next(error)
@@ -42,20 +45,9 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { id } = req.params
-    await userService.delete(id)
-    return httpResponse.OK(res)
-  } catch (error) {
-    next(error)
-  }
-}
-
 export {
   createUser,
   getAllUsers,
   getUser,
-  updateUser,
-  deleteUser
+  updateUser
 }

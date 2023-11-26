@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllUsers, createUser, getUser, updateUser, deleteUser } from '@/controllers/user'
+import { getAllUsers, createUser, getUser, updateUser } from '@/controllers/user'
 
 const router = Router()
 
@@ -10,5 +10,4 @@ router.route('/')
 router.route('/:id')
   .get(getUser)
   .put(updateUser)
-  .delete(deleteUser)
 export { router }
