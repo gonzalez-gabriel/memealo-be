@@ -25,7 +25,7 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params
     const user = await userService.getOne(id)
-    if (user !== null) {
+    if (user === null) {
       return httpResponse.NOT_FOUND(res, 'User not found')
     }
     return httpResponse.OK(res, user)
@@ -39,6 +39,9 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
     const { body, params } = req
     const { id } = params
     const updatedUser = await userService.update(id, body)
+    if (updateUser === null) {
+      return httpResponse.NOT_FOUND(res, 'User not found')
+    }
     return httpResponse.OK(res, updatedUser)
   } catch (error) {
     next(error)
