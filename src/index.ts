@@ -26,11 +26,7 @@ io.on('connection', (socket) => {
   })
 })
 
-app.get(['/', '/login'], (_req: Request, res: Response) => {
-  res.sendFile(process.cwd() + '/client/login.html')
-})
-
-app.get('/chat', (_req: Request, res: Response) => {
+app.get(['/', '/chat'], (_req: Request, res: Response) => {
   res.sendFile(process.cwd() + '/client/index.html')
 })
 
