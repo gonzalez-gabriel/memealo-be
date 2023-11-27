@@ -9,5 +9,8 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/return-await": "off",
+        "@typescript-eslint/no-misused-promises": "off"
     }
 }
