@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login!</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #080808;
+      }
+
+      section > h1 {
+        color: #ffffff;
+      }
+
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      div {
+        border: 2px solid #202020;
+        background-color: #409090;
+      }
+
+      button {
+        cursor: pointer;
+        background-color: #409090;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>¡Bienvenido! Inicia sesión y juega</h1>
+      <form action="/login" method="post">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" id="username" placeholder="John Doe" required />
+        </div>
+        <button>Login</button>
+      </form>
+    </section>
+  </body>
+</html>
