@@ -1,7 +1,7 @@
-console.log('Hello World')
+import express from 'express'
 
-function sum (a: number, b: number): number {
-    return a + b
-    }
+const app = express()
 
-    console.log(sum(1, 2))
+app.listen(3000, () => {
+  console.log('Server is running on port 3000')
+})
