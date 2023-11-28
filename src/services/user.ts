@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/return-await */
 import prisma from '../../libs/prisma'
 
 export const userService = {
