@@ -8,7 +8,10 @@
     "build": "tsup",
     "start": "node ./dist/index.js",
     "lint": "eslint 'src/**/*.{js,ts}'",
-    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,ts}'"
+    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,ts}'",
+    "test:unit": "vitest -c ./vitest.config.unit.ts",
+    "test:unit:ui": "vitest -c ./vitest.config.unit.ts --ui",
+    "test:integration": "vitest -c ./vitest.config.integration.ts"
   },
   "keywords": [
     "memealo",
@@ -37,7 +40,10 @@
     "prettier": "3.1.0",
     "prisma": "5.6.0",
     "tsup": "8.0.1",
-    "typescript": "5.3.2"
+    "typescript": "5.3.2",
+    "@vitest/ui": "0.34.6",
+    "vitest": "^0.34.6",
+    "vitest-mock-extended": "^1.0.7"
   },
   "dependencies": {
     "@prisma/client": "5.4.2",
