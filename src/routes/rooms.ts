@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllRooms, createRoom, deleteRoom, getRoom, updateRoom } from '../controllers/roomController'
+import { getAllRooms, createRoom, getRoom, updateRoom } from '@/controllers/room.controller'
 
 const router = Router()
 
@@ -10,6 +10,5 @@ router.route('/')
 router.route('/:id')
   .get(getRoom)
   .put(updateRoom)
-  .delete(deleteRoom)
 
 export { router }

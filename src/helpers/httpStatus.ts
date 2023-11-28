@@ -1,46 +1,74 @@
-import type { Response } from 'express'
+import type { CustomResponseData, CustomResponseMessage, CustomResponseMessageError } from '@/types/response'
 
-enum HttpStatus {
-  OK = 200,
-  CREATED = 201,
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
-  INTERNAL_SERVER_ERROR = 500
-}
-
-export const httpResponse = {
-  OK: (res: Response, data?: any) => {
-    return res.status(HttpStatus.OK).json({
-      status: HttpStatus.OK,
-      message: 'Success',
+const HttpStatus = {
+  OK: (res: CustomResponseData, data: any) => {
+    return res.json({
+      statusMsg: 'OK',
+      status: 200,
       data
     })
   },
-  CREATED: (res: Response, data: any) => {
-    return res.status(HttpStatus.CREATED).json({
-      status: HttpStatus.CREATED,
-      message: 'Created',
+  CREATED: (res: CustomResponseData, data: any) => {
+    return res.json({
+      statusMsg: 'Created',
+      status: 201,
       data
     })
   },
-  NOT_FOUND: (res: Response, message: string) => {
-    return res.status(HttpStatus.NOT_FOUND).json({
-      status: HttpStatus.NOT_FOUND,
-      message
-    })
-  },
-  BAD_REQUEST: (res: Response, message: string, errorData: any) => {
-    return res.status(HttpStatus.BAD_REQUEST).json({
-      status: HttpStatus.BAD_REQUEST,
+  NO_CONTENT: (res: CustomResponseMessageError, message: string, errorData: any) => {
+    return res.json({
+      statusMsg: 'not content king',
+      status: 204,
       message,
       error: errorData
     })
   },
-  UNAUTHORIZED: (res: Response, message: string) => {
-    return res.status(HttpStatus.UNAUTHORIZED).json({
-      status: HttpStatus.UNAUTHORIZED,
+  BAD_REQUEST: (res: CustomResponseMessageError, message: string, errorData: any) => {
+    return res.json({
+      statusMsg: 'Bad Request',
+      status: 400,
+      message,
+      error: errorData
+    })
+  },
+  UNAUTHORIZED: (res: CustomResponseMessage, message: string) => {
+    return res.json({
+      statusMsg: 'Unauthorized',
+      status: 401,
       message
     })
+  },
+  FORBIDDEN: (res: CustomResponseMessage, message: string) => {
+    return res.json({
+      statusMsg: 'Forbidden',
+      status: 403,
+      message
+    })
+  },
+  NOT_FOUND: (res: CustomResponseMessageError, message: string, errorData: any) => {
+    return res.json({
+      statusMsg: 'Not Found',
+      status: 404,
+      message,
+      error: errorData
+    })
+  },
+  UNPROCESSABLE_ENTITY: (res: CustomResponseMessageError, message: string, errorData: any) => {
+    return res.json({
+      statusMsg: 'Unprocessable Entity',
+      status: 422,
+      message,
+      error: errorData
+    })
+  },
+  INTERNAL_SERVER_ERROR: (res: CustomResponseMessageError, message: string, errorData: any) => {
+    return res.json({
+      statusMsg: 'Internal Server Error',
+      status: 500,
+      message,
+      error: errorData
+    })
   }
-}
+} as const
+
+export { HttpStatus }
