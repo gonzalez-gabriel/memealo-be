@@ -1,2 +1,4 @@
 compose.yml
 node_modules
+dist
+.env

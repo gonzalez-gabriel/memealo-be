@@ -6,8 +6,11 @@
     },
     "extends": "standard-with-typescript",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "project":"./tsconfig.json"
     },
     "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-misused-promises":"off"
     }
 }
