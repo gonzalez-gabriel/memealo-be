@@ -7,4 +7,8 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> 18dc1b42682303513fdea878079ee71774801d9c
