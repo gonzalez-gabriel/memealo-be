@@ -8,6 +8,7 @@ router.route('/')
   .post(createRoom)
 
 router.route('/:id')
+
   .get(getRoom)
   .put(updateRoom)
 

@@ -1,74 +1,74 @@
 import type { CustomResponseData, CustomResponseMessage, CustomResponseMessageError } from '@/types/response'
 
-const HttpStatus = {
+enum HttpStatus {
+  OK= 200,
+  CREATED= 201,
+  BAD_REQUEST= 400,
+  UNAUTHORIZED= 401,
+  FORBIDDEN= 403,
+  NOT_FOUND= 404,
+  UNPROCESSABLE_ENTITY= 422,
+  INTERNAL_SERVER_ERROR= 500
+} 
+
+export const httpResponse = {
   OK: (res: CustomResponseData, data: any) => {
-    return res.json({
-      statusMsg: 'OK',
-      status: 200,
+    return res.status(HttpStatus.OK).json({
+      status: HttpStatus.OK,
+      statusMsg: 'Success',
       data
     })
   },
   CREATED: (res: CustomResponseData, data: any) => {
     return res.json({
+      status: HttpStatus.CREATED,
       statusMsg: 'Created',
-      status: 201,
       data
-    })
-  },
-  NO_CONTENT: (res: CustomResponseMessageError, message: string, errorData: any) => {
-    return res.json({
-      statusMsg: 'not content king',
-      status: 204,
-      message,
-      error: errorData
     })
   },
   BAD_REQUEST: (res: CustomResponseMessageError, message: string, errorData: any) => {
     return res.json({
+      status: HttpStatus.BAD_REQUEST,
       statusMsg: 'Bad Request',
-      status: 400,
       message,
       error: errorData
     })
   },
   UNAUTHORIZED: (res: CustomResponseMessage, message: string) => {
-    return res.json({
+    return res.status(HttpStatus.UNAUTHORIZED).json({
+      status: HttpStatus.UNAUTHORIZED,
       statusMsg: 'Unauthorized',
-      status: 401,
       message
     })
   },
   FORBIDDEN: (res: CustomResponseMessage, message: string) => {
-    return res.json({
+    return res.status(HttpStatus.FORBIDDEN).json({
+      status: HttpStatus.FORBIDDEN,
       statusMsg: 'Forbidden',
-      status: 403,
       message
     })
   },
-  NOT_FOUND: (res: CustomResponseMessageError, message: string, errorData: any) => {
-    return res.json({
+  NOT_FOUND: (res: CustomResponseMessage, message: string) => {
+    return res.status(HttpStatus.NOT_FOUND).json({
+      status: HttpStatus.NOT_FOUND,
       statusMsg: 'Not Found',
-      status: 404,
-      message,
-      error: errorData
+      message
     })
   },
   UNPROCESSABLE_ENTITY: (res: CustomResponseMessageError, message: string, errorData: any) => {
-    return res.json({
+    return res.status(HttpStatus.UNPROCESSABLE_ENTITY).json({
+      status: HttpStatus.UNPROCESSABLE_ENTITY,
       statusMsg: 'Unprocessable Entity',
-      status: 422,
       message,
       error: errorData
     })
   },
-  INTERNAL_SERVER_ERROR: (res: CustomResponseMessageError, message: string, errorData: any) => {
-    return res.json({
+  INTERNAL_SERVER_ERROR: (res: CustomResponseMessageError, message: string, error: any) => {
+    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      status: HttpStatus.INTERNAL_SERVER_ERROR,
       statusMsg: 'Internal Server Error',
-      status: 500,
       message,
-      error: errorData
+      error: error.message
     })
   }
-} as const
-
-export { HttpStatus }
+}
