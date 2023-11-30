@@ -1,4 +1,8 @@
-import type { CustomResponseData, CustomResponseMessage, CustomResponseMessageError } from '@/types/response'
+import type {
+  CustomResponseData,
+  CustomResponseMessage,
+  CustomResponseMessageError
+} from '@/types/response'
 
 enum HttpStatus {
   OK = 200,
