@@ -1,18 +1,13 @@
 import express from 'express'
 import { router } from './routes'
-import 'dotenv/config'
-import cors from 'cors'
 
-const app = express()
+const app = express();
+const port = 3000;
 
-app.use(cors())
+app.use(express.json());
 
-const PORT = process.env.PORT
+app.use('/api', router);
 
-app.use(express.json())
-
-app.use('/api', router)
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+app.listen(port, () => {
+  console.log(`Servidor levantado en el puerto ${port}`)
 })
