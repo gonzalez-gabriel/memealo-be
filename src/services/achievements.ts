@@ -22,7 +22,8 @@ export const achievementsService = {
         return await prisma.achievements.update({
             where: {
                 id: Number(id)
-            }
+            },
+            data
         })
     }
 }
