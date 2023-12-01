@@ -1,19 +1,15 @@
-import type {
-  CustomResponseData,
-  CustomResponseMessage,
-  CustomResponseMessageError
-} from '@/types/response'
+import type { CustomResponseData, CustomResponseMessage, CustomResponseMessageError } from '@/types/response'
 
 enum HttpStatus {
-  OK = 200,
-  CREATED = 201,
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  FORBIDDEN = 403,
-  NOT_FOUND = 404,
-  UNPROCESSABLE_ENTITY = 422,
-  INTERNAL_SERVER_ERROR = 500
-}
+  OK= 200,
+  CREATED= 201,
+  BAD_REQUEST= 400,
+  UNAUTHORIZED= 401,
+  FORBIDDEN= 403,
+  NOT_FOUND= 404,
+  UNPROCESSABLE_ENTITY= 422,
+  INTERNAL_SERVER_ERROR= 500
+} 
 
 export const httpResponse = {
   OK: (res: CustomResponseData, data: any) => {
@@ -24,14 +20,14 @@ export const httpResponse = {
     })
   },
   CREATED: (res: CustomResponseData, data: any) => {
-    return res.status(HttpStatus.CREATED).json({
+    return res.json({
       status: HttpStatus.CREATED,
       statusMsg: 'Created',
       data
     })
   },
   BAD_REQUEST: (res: CustomResponseMessageError, message: string, errorData: any) => {
-    return res.status(HttpStatus.BAD_REQUEST).json({
+    return res.json({
       status: HttpStatus.BAD_REQUEST,
       statusMsg: 'Bad Request',
       message,
