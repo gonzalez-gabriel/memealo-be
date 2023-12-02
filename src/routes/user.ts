@@ -1,9 +1,14 @@
 import { Router } from 'express'
 import { getAllUsers, createUser, getUser, updateUser } from '@/controllers/user'
 
-const router = Router()
+const userRouter = Router()
 
-router.route('/').get(getAllUsers).post(createUser)
+userRouter.route('/users')
+  .get(getAllUsers)
+  .post(createUser)
 
-router.route('/:id').get(getUser).put(updateUser)
-export { router }
+userRouter.route('/users/:id')
+  .get(getUser)
+  .put(updateUser)
+  
+export { userRouter }

@@ -18,14 +18,17 @@
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module"
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project":"./tsconfig.json"
     },
     "rules": {
         "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-misused-promises":"off",
+        "@typescript-eslint/no-explicit-any":"off",
         "@typescript-eslint/return-await": "off",
-        "@typescript-eslint/no-misused-promises": "off",
-        "prettier/prettier": "error"
+        "prettier/prettier": "off"
+
     },
     "ignorePatterns": [
         "node_modules",

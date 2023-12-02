@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/return-await */
-import prisma from '../../libs/prisma'
+import prisma from '@/libs/prisma'
 
 export const userService = {
   create: async (data: any) => {
