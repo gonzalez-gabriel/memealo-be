@@ -48,9 +48,4 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export {
-  createUser,
-  getAllUsers,
-  getUser,
-  updateUser
-}
+export { createUser, getAllUsers, getUser, updateUser }

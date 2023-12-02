@@ -10,8 +10,7 @@ const app = express()
 const server = createServer(app)
 
 const io = new Server(server, {
-  connectionStateRecovery: {
-  }
+  connectionStateRecovery: {}
 })
 
 io.on('connection', (socket) => {
