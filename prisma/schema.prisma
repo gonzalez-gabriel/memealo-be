@@ -9,3 +9,140 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id             Int              @id @default(autoincrement())
+  username       String           @unique
+  email          String           @unique
+  password       String
+  cheemsCoins    Int              @map("cheems_coins")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  userConfig     UserConfigs?
+  achievements   Achievements[]
+  usersCosmetics UsersCosmetics[]
+  usersRooms     UsersRooms[]
+
+  @@map("users")
+}
+
+model UsersRooms {
+  userId    Int      @map("user_id")
+  roomId    Int      @map("room_id")
+  users     Users    @relation(fields: [userId], references: [id])
+  rooms     Rooms    @relation(fields: [roomId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@id([userId, roomId])
+  @@map("room_players")
+}
+
+model Rooms {
+  id          Int          @id @default(autoincrement())
+  roomName    String       @map("room_name")
+  password    String
+  userRooms   UsersRooms[]
+  gameStatsId Int          @unique @map("game_stats_id")
+  gameStats   GameStats    @relation(fields: [gameStatsId], references: [id])
+  isActive    Boolean      @map("is_active")
+  maxPlayers  Int          @map("max_players")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@map("rooms")
+}
+
+model GameStats {
+  id        Int      @id @default(autoincrement())
+  victory   String
+  rooms     Rooms[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("game_stats")
+}
+
+model UserConfigs {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique @map("user_id")
+  user      Users    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("user_configs")
+}
+
+model Achievements {
+  id          Int      @id @default(autoincrement())
+  imageUrl    String   @map("image_url")
+  description String
+  title       String
+  condition   String
+  userId      Int      @map("user_id")
+  user        Users    @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("achievements")
+}
+
+enum CosmeticType {
+  AVATAR
+  FRAME
+  FOIL
+  BACKGROUND
+}
+
+model Cosmetics {
+  id             Int              @id @default(autoincrement())
+  imageUrl       String           @map("image_url")
+  type           CosmeticType
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  usersCosmetics UsersCosmetics[]
+}
+
+model UsersCosmetics {
+  userId     Int       @map("user_id")
+  user       Users     @relation(fields: [userId], references: [id])
+  cosmeticId Int       @map("cosmetic_id")
+  cosmetic   Cosmetics @relation(fields: [cosmeticId], references: [id])
+  owned      Boolean   @default(false)
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@id([userId, cosmeticId])
+  @@map("users_cosmetics")
+}
+
+model Situations {
+  id           Int      @id @default(autoincrement())
+  descriptions String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+}
+
+model MemeCards {
+  id         Int      @id @default(autoincrement())
+  name       String
+  cardNumber Int      @unique @map("card_number")
+  imageUrl   String   @map("image_url")
+  cardLore   String   @map("card_lore")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("meme_card")
+}
+
+model TwistCards {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  key         String   @unique
+  imageUrl    String   @map("image_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("twist_cards")
+}
