@@ -1,0 +1,1 @@
+import type { BodyUserType } from '@/types/user'
