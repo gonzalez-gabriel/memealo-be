@@ -5,18 +5,20 @@ import { errorHandler } from '@/middlewares/errorHandler'
 import 'dotenv/config'
 import cors from 'cors'
 
+const PORT = process.env.PORT
+
 const app = express()
 
-app.use(cors())
+app.listen(3000, () => {
+  app.use(cors())
 
-const PORT = process.env.PORT || 3000
+  app.use(express.json())
 
-app.use(express.json())
+  app.use('/api', roomsRouter, userRouter)
 
-app.use('/api', roomsRouter, userRouter)
+  app.use(errorHandler)
 
-app.use(errorHandler)
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
+  })
 })
