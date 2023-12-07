@@ -30,7 +30,8 @@ const getRoom = async (req: Request, res: Response, next: NextFunction) => {
 
 const createRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const rooms = await roomService.create(req.body)
+    const { data } = req.body
+    const rooms = await roomService.create(data)
     if (rooms === null) {
       return httpResponse.NOT_FOUND(res, 'not found create')
     }
