@@ -1,34 +1,28 @@
-import express from 'express'
 import { Server } from 'socket.io'
-import { createServer } from 'node:http'
-import type { Request, Response } from 'express'
+import type { Server as HttpServer } from 'http'
+import type { ClientToServerEvents, ServerToClientEvents, SocketData, InterServerEvents } from '@/types/socket'
 
-const PORT = process.env.PORT ?? 3000
 
-const app = express()
-
-const server = createServer(app)
-
-const io = new Server(server, {
-  connectionStateRecovery: {}
-})
-
-io.on('connection', (socket) => {
-  console.log('user has connected!')
-
-  socket.on('disconnected', () => {
-    console.log('an user has disconnected')
+export const socketServer = (server: HttpServer) => {
+  const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>(server, {
+    connectionStateRecovery: {}
   })
 
-  socket.on('chat message', (msg: string) => {
-    io.emit('chat message', msg)
+  console.log('socket.io is running')
+
+  io.on('connection', (socket) => {
+    console.log('user has connected!')
+
+    socket.on('join-room', ({ room }: { room: string }) => {
+      socket.join(room)
+    })
+
+    socket.on('message-sent', ({ message, room }: { message: string, room: string }) => {
+      socket.to(room).emit('message-received', { message })
+    })
+
+    socket.on('disconnected', () => {
+      console.log('an user has disconnected')
+    })
   })
-})
-
-app.get('/chat', (_req: Request, res: Response) => {
-  res.sendFile(process.cwd() + '/client/index.html')
-})
-
-server.listen(3000, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+}
