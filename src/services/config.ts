@@ -1,28 +1,60 @@
-import prisma from "@/libs/prisma"
+import prisma from '@/libs/prisma'
 
-export const serviceConfig = {
-    getOne: async (id: String) => {
-        const config = await prisma.users.findUnique({
-            where: {
-                id: Number(id)
-            },
-            include: {
-                userConfig: true,
-                achievements: true,
-                usersCosmetics: true,
-            }
-        })
-        return config;     
+const serviceConfigAll = {
+  getSituations: async () => {
+    return await prisma.situations.findMany()
+  },
+  getGameStats: async () => {
+      return await prisma.gameStats.findMany()
     },
-    getAll: async () => {
-        const config = await prisma.users.findMany({   
-            include: {
-                userConfig: true,
-                achievements: true,
-                usersCosmetics: true
-            }         
-        })       
-        return config
-    }
-    
+   getAchievements: async () => {
+      return await prisma.achievements.findMany()
+   },
+   getCosmetics: async () => {
+      return await prisma.cosmetics.findMany()
+   },
+   getTwistCard:async() => {
+      return await prisma.twistCards.findMany()
+   }
 }
+
+const serviceConfigOne = {
+    getOneSituation: async (id: String) => {
+      return await prisma.situations.findUnique({
+        where: {
+          id: Number(id)
+        }
+      })
+    },
+    
+    getOneStatus: async (id: String) => {
+      return await prisma.gameStats.findUnique({
+        where: {
+          id: Number(id)
+        }
+      })
+    },
+    getOneAchievement: async (id: String) => {
+        return await prisma.achievements.findUnique({
+        where: {
+          id: Number(id)
+        }
+      })   
+    },
+    getOneCosmetic: async (id: String) => {
+        return await prisma.cosmetics.findUnique({
+        where: {
+          id: Number(id)
+        }
+      })   
+    },
+    getOneTwistCard: async (id: String) => {
+        return await prisma.twistCards.findUnique({
+        where: {
+          id: Number(id)
+        }
+      })      
+    },  
+}
+
+export { serviceConfigAll, serviceConfigOne }

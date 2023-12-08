@@ -13,7 +13,7 @@ export const roomService = {
     })
   },
   create: async (data: any) => {
-    const { isActive, maxPlayers, roomName, password, gameStats   } = data
+    const { isActive, maxPlayers, roomName, password, gameStats  } = data
     return await prisma.rooms.create({
       data: {
         isActive,

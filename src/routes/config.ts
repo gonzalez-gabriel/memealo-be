@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllConfig, getOneConfig } from '@/controllers/config'
+import { getAllConfig, getOneConfig  } from '@/controllers/config'
 
 const configRouter = Router()
 
