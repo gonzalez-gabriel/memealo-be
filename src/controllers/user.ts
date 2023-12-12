@@ -1,8 +1,9 @@
-import type { Request, Response, NextFunction } from 'express'
 import { userService } from '@/services/user'
 import { httpResponse } from '@/helpers/httpStatus'
+import type { BodyUserType, IdUserType } from '@/types/user'
+import type { Request, Response, NextFunction } from 'express'
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+const createUser = async (req: Request<unknown, unknown, BodyUserType>, res: Response, next: NextFunction) => {
   try {
     const { body } = req
     const user = await userService.create(body)
@@ -21,7 +22,7 @@ const getAllUsers = async (_req: Request, res: Response, next: NextFunction) => 
   }
 }
 
-const getUser = async (req: Request, res: Response, next: NextFunction) => {
+const getUser = async (req: Request<IdUserType>, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params
     const user = await userService.getOne(id)
@@ -34,7 +35,7 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+const updateUser = async (req: Request<IdUserType, unknown, Partial<BodyUserType>>, res: Response, next: NextFunction) => {
   try {
     const { body, params } = req
     const { id } = params
