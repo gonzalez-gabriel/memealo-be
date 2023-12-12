@@ -1,7 +1,8 @@
 import prisma from '@/libs/prisma'
+import type  { BodyUserType } from '@/types/user'
 
 export const userService = {
-  create: async (data: any) => {
+  create: async (data: BodyUserType) => {
     return await prisma.users.create({
       data
     })
@@ -16,12 +17,12 @@ export const userService = {
       }
     })
   },
-  update: async (id: string, data: any) => {
+  update: async (id: string, newData: Partial<BodyUserType>) => {
     return await prisma.users.update({
       where: {
         id: Number(id)
       },
-      data
+      ...newData
     })
   }
 }

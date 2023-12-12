@@ -6,6 +6,7 @@ import { errorHandler } from '@/middlewares/errorHandler'
 import 'dotenv/config'
 import { socketServer } from '@/socket'
 import cors from 'cors'
+import { expressjwt as jwt } from 'express-jwt'
 
 const PORT = process.env.PORT ?? 5000
 
@@ -17,6 +18,13 @@ socketServer(server)
 app.use(cors())
 
 app.use(express.json())
+
+app.use(
+  jwt({
+    secret: process.env.SECRET_KEY,
+    algorithms: ["HS256"]
+  }).unless({ path: ["/api/auth/register", "/api/auth/login", "/api/auth/refresh"] })
+)
 
 app.use('/api', roomsRouter, userRouter)
 
