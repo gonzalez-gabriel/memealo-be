@@ -2,6 +2,8 @@ import express from 'express'
 import { createServer } from 'node:http'
 import { roomsRouter } from '@/routes/rooms'
 import { userRouter } from '@/routes/user'
+import { configRouter } from '@/routes/config'
+import { achievementsRouter } from '@/routes/achievements'
 import { errorHandler } from '@/middlewares/errorHandler'
 import 'dotenv/config'
 import { socketServer } from '@/socket'
@@ -18,7 +20,7 @@ app.use(cors())
 
 app.use(express.json())
 
-app.use('/api', roomsRouter, userRouter)
+app.use('/api', roomsRouter, userRouter, configRouter, achievementsRouter)
 
 app.use(errorHandler)
 

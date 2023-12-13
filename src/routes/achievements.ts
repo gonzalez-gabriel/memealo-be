@@ -7,10 +7,15 @@ import {
   deleteAchievements
 } from '@/controllers/achievements'
 
-const router = Router()
+const achievementsRouter = Router()
 
-router.route('/').get(getAllAchievements).post(createAchievements)
+achievementsRouter.route('/achievements')
+.get(getAllAchievements)
+.post(createAchievements)
 
-router.route('/:id').get(getAchievements).put(updateAchievements).delete(deleteAchievements)
+achievementsRouter.route('/achievements/:id')
+.get(getAchievements)
+.put(updateAchievements)
+.delete(deleteAchievements)
 
-export { router }
+export { achievementsRouter }

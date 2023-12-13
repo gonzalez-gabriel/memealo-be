@@ -12,10 +12,11 @@ export const roomService = {
       }
     })
   },
-  create: async (data: any) => {
-    return await prisma.rooms.create({
+  create: async (data:any) => {
+    const config = await prisma.rooms.create({
       data
     })
+    return config
   },
   update: async (id: string, data: any) => {
     return await prisma.rooms.update({
