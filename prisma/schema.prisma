@@ -29,8 +29,8 @@ model Users {
 model UsersRooms {
   userId    Int      @map("user_id")
   roomId    Int      @map("room_id")
-  users     Users    @relation(fields: [userId], references: [id])
-  rooms     Rooms    @relation(fields: [roomId], references: [id])
+  users     Users?   @relation(fields: [userId], references: [id])
+  rooms     Rooms?    @relation(fields: [roomId], references: [id])
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -66,7 +66,7 @@ model GameStats {
 model UserConfigs {
   id        Int      @id @default(autoincrement())
   userId    Int      @unique @map("user_id")
-  user      Users    @relation(fields: [userId], references: [id])
+  user      Users?    @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
