@@ -27,7 +27,8 @@
         "@typescript-eslint/no-misused-promises":"off",
         "@typescript-eslint/no-explicit-any":"off",
         "@typescript-eslint/return-await": "off",
-        "prettier/prettier": "off"
+        "prettier/prettier": "off",
+        "@typescript-eslint/no-floating-promises": "off"
 
     },
     "ignorePatterns": [
