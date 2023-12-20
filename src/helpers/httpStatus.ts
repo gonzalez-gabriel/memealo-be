@@ -20,14 +20,14 @@ export const httpResponse = {
     })
   },
   CREATED: (res: CustomResponseData, data: any) => {
-    return res.json({
+    return res.status(HttpStatus.CREATED).json({
       status: HttpStatus.CREATED,
       statusMsg: 'Created',
       data
     })
   },
   BAD_REQUEST: (res: CustomResponseMessageError, message: string, errorData: any) => {
-    return res.json({
+    return res.status(HttpStatus.BAD_REQUEST).json({
       status: HttpStatus.BAD_REQUEST,
       statusMsg: 'Bad Request',
       message,
