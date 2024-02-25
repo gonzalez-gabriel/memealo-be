@@ -6,6 +6,7 @@ export const userService = {
     return await prisma.users.create({
       data: {
         ...data,
+        // password: data.password, hacer lo de bycrypt
       }
     })
   },

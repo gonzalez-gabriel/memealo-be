@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from 'express'
 import type { BodyUserType, IdUserType } from '@/types/user'
 import { userService } from '@/services/user'
 import { httpResponse } from '@/helpers/httpStatus'
+import { string } from 'zod'
 
 const createUser = async (req: Request<unknown, unknown ,BodyUserType>, res: Response, next: NextFunction) => {
   try {
